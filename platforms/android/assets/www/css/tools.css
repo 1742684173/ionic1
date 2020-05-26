@@ -1,0 +1,11 @@
+/*当文字很多时，后面用省略号表示。
+ * overflow: hidden和white-space: nowrap都是必须的否则不会显示省略号；
+ * -o-text-overflow: ellipsis针对Opera；
+ * 而宽度的设定主要是针对IE6；*/
+#wenZiShenLue {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 100%;
+}

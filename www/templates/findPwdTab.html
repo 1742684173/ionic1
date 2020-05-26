@@ -1,0 +1,76 @@
+<ion-view id="findPwdTab" title="{{'FINDPWD_TITLE'| translate}}" style="text-transform:none;">
+	<header class="bar bar-header bar-positive">
+		<button class="button button-clear " ng-click="back()">
+			<i class="icon ion-ios-arrow-back"></i>
+			{{'BACK'| translate}}
+		</button>
+		<h1 class="title ">{{'FINDPWD_TITLE'| translate}}</h1>
+	</header>
+
+	<ion-content class="has-header text-center">
+		
+		<form name="findPwdForm" novalidate>
+			<!--user输入框-->
+			<div class="item item-input row">
+				<div class="col col-20">
+					{{'FINDPWD_USER'| translate}}
+					<span style="color: red;" ng-show="findPwdForm.account.$invalid">*</span>
+				</div>
+				<div class="col col-80">
+					<input type="text" placeholder="{{'FINDPWD_INPUT_USER'| translate}}" 
+						name="account" required ng-minlength="6" ng-maxlength="30" ng-model="user.account">
+				</div>
+			</div>
+
+			<!--验证码输入框 和 获取验证码按钮-->
+			<div class="item item-input row">
+				<div class="col col-20">
+					{{'FINDPWD_CODE'| translate}}
+					<span style="color: red;" ng-show="findPwdForm.code.$invalid">*</span>
+				</div>
+				<div class="col col-40">
+					<input type="text" placeholder="{{'FINDPWD_INPUT_CODE'| translate}}" 
+						name="code" required ng-minlength="6" ng-maxlength="6" ng-model="user.code">
+				</div>
+				<div class="col col-30">
+					<button class="button" ng-click="getCode()" ng-bind="codeText" ng-disabled="canClick">{{'FINDPWD_SUBMIT'| translate}}</button>
+				</div>
+				<div class="col col-10">
+				</div>
+			</div>
+
+			<!--密码输入框 -->
+			<div class="item item-input row">
+				<div class="col col-20">
+					{{'FINDPWD_NEW_PWD'| translate}}
+					<span style="color: red;" ng-show="findPwdForm.password.$invalid">*</span>
+				</div>
+				<div class="col col-80">
+					<input type="password" placeholder="{{'FINDPWD_INPUT_NEW_PWD'| translate}}" name="password" required ng-pattern="/[a-zA-Z0-9]/" ng-maxlength="30" ng-minlength="6" ng-model="user.password">
+				</div>
+			</div>
+
+			<!--确认密码输入框-->
+			<div class="item item-input row">
+				<div class="col col-20">
+					{{'FINDPWD_CONFIRM_PWD'| translate}}
+					<span style="color: red;" ng-show="findPwdForm.password2.$invalid ||
+                     	 	 		user.password != password2">*</span>
+				</div>
+				<div class="col col-80">
+					<input type="password" placeholder="{{'FINDPWD_INPUT_CONFIRM_PWD'| translate}}" name="password2" required ng-model="password2">
+				</div>
+			</div>
+
+		</form>
+
+		<br>
+		<button style="width: 200px;" class="button button-balanced" ng-disabled="findPwdForm.account.$invalid ||
+						findPwdForm.code.$invalid || findPwdForm.password.$invalid ||
+						findPwdForm.password2.$invalid || user.password != password2 " ng-click="findPwd()">
+						{{'FINDPWD_SUBMIT'| translate}}
+					</button>
+
+	</ion-content>
+
+</ion-view>

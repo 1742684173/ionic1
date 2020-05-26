@@ -1,0 +1,44 @@
+<ion-view id="box" style="text-transform:none;">
+	<header class="bar bar-header bar-positive">
+		<button class="button button-clear " ng-click="back()">
+			<i class="icon ion-ios-arrow-back"></i>
+			{{'BACK'| translate}}
+		</button>
+		<h1 class="title ">{{'SECURE_TITLE'| translate}}</h1>
+	</header>
+
+	<ion-content class="has-header">
+
+		<div class="list">
+
+			<!--divider-->
+			<div class="item item-divider">
+				<h2>{{'ACCOUNT'| translate}}</h2>
+			</div>
+
+			<div class="item" ng-click="updatePhone()">
+				{{'SECURE_CHANGE_PHONE'| translate}}
+			</div>
+			
+			<div class="item" ng-click="updateEmail()">
+				{{'SECURE_CHANGE_EMAIL'| translate}}
+			</div>
+
+			<!--divider-->
+			<div class="item item-divider">
+				<h2>{{'SECURE'| translate}}</h2>
+			</div>
+
+			<div class="item" ng-click="updatePwd()">
+				{{'SECURE_MODIFY_PWD'| translate}}
+			</div>
+			
+			<div class="item" ng-click="lock()">
+				{{'SECURE_LOCK'| translate}}
+			</div>
+
+		</div>
+
+	</ion-content>
+
+</ion-view>

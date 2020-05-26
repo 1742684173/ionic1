@@ -1,0 +1,65 @@
+<ion-view title="{{'SET_TITLE'| translate}}" id="set" style="text-transform:none;">
+	<ion-content class="has-header">
+
+		<div class="list">
+
+			<!--person set-->
+			<div class="item item-avatar">
+				<img src="img/menu_set_person_ico.png">
+				<h2>{{loginData.user }}</h2>
+				<p>{{loginData.name}}</p>
+			</div>
+
+			<!--divider-->
+			<div class="item item-divider">
+			</div>
+
+			<!--account and security-->
+			<div class="item item-icon-right" ng-click="goAccountSet()">
+				{{'SET_ACCOUNT_SECURY'| translate}}
+				<i class="icon ion-ios-arrow-right"></i>
+			</div>
+
+			<!--divider-->
+			<div class="item item-divider">
+			</div>
+
+			<!--firmware update-->
+			<div class="item item-icon-right">
+				{{'SET_FIREWARE_UPDATE'| translate}}
+				<!--<i class="icon ion-ios-arrow-right"></i>-->
+			</div>
+			
+			<!--soft update-->
+			<div class="item" ng-click="softUpdate()">
+				{{'SET_SOFT_UPDATE'| translate}}
+				<span style="float:right;font:10;color: gray;"ng-if="!version.isUpdate">{{'SET_LATEST_VERSION'| translate}}</span>
+				<span style="float:right;font:10;color: gray;"ng-if="version.isUpdate">{{'SET_UPDATE_VERSION'| translate}}</span>
+			
+			</div>
+
+			<!--divider-->
+			<div class="item item-divider">
+			</div>
+
+			<div class="item">
+				{{'SET_VERSION'| translate}}
+				<span style="float:right;font:10;color: gray;">{{version.now}}</span>
+			</div>
+
+			<!--divider-->
+			<div class="item item-divider">
+			</div>
+
+			<!--exit-->
+			<div class="item">
+				<button class="button button-block button-balanced" ng-click="exit()">
+					{{'SET_EXIT'| translate}}
+				</button>
+			</div>
+			
+
+		</div>
+
+	</ion-content>
+</ion-view>

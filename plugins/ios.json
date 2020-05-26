@@ -1,0 +1,72 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-android-permissions": {
+      "PACKAGE_NAME": "com.wecon.vbox"
+    },
+    "cordova-plugin-app-version": {
+      "PACKAGE_NAME": "com.wecon.vbox"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.wecon.vbox"
+    },
+    "cordova-plugin-file-opener2": {
+      "PACKAGE_NAME": "com.wecon.vbox"
+    },
+    "cordova-plugin-file-transfer": {
+      "PACKAGE_NAME": "com.wecon.vbox"
+    },
+    "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "com.wecon.vbox"
+    },
+    "cordova-plugin-screen-orientation": {
+      "PACKAGE_NAME": "com.wecon.vbox"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.wecon.vbox"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.wecon.vbox"
+    },
+    "cordova-plugin-x-toast": {
+      "PACKAGE_NAME": "com.wecon.vbox"
+    },
+    "cordova-sqlite-storage": {
+      "PACKAGE_NAME": "com.wecon.vbox"
+    },
+    "hewz.plugins.baidu-location": {
+      "API_KEY": "22nCxldLGEbsQ3gXBNTwhF4Te4UDzECE",
+      "PACKAGE_NAME": "com.wecon.vbox"
+    },
+    "ionic-plugin-keyboard": {
+      "PACKAGE_NAME": "com.wecon.vbox"
+    },
+    "jpush-phonegap-plugin": {
+      "APP_KEY": "952963faa8710180979ac5c5",
+      "PACKAGE_NAME": "com.wecon.vbox"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.wecon.vbox"
+    }
+  },
+  "dependent_plugins": {
+    "cordova-plugin-compat": {
+      "PACKAGE_NAME": "com.wecon.vbox"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.wecon.vbox"
+    },
+    "cordova-plugin-jcore": {
+      "PACKAGE_NAME": "com.wecon.vbox"
+    },
+    "es6-promise-plugin": {
+      "PACKAGE_NAME": "com.wecon.vbox"
+    }
+  }
+}

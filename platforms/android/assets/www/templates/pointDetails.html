@@ -1,0 +1,78 @@
+<ion-view id="point" style="text-transform:none;">
+	<header class="bar bar-header bar-positive">
+		<button class="button button-clear " ng-click="back()">
+			<i class="icon ion-ios-arrow-back"></i>
+			{{'BACK'| translate}}
+		</button>
+		<h1 class="title ">{{'POINT_DETAILS_TITLE'|translate}}</h1>
+		<button class="button button-clear " ng-click="updateValue()">
+			{{'POINT_VALUE_UPDATE'| translate}}
+		</button>
+	</header>
+	
+	<ion-content class="has-header">
+		<!--监控点名称-->
+		<div class="row" style="margin-top: 20px;">
+			<span style="color: grey;text-align: left;margin: 10px;width: 35%;">
+				{{'POINT_NAME'|translate}}
+			</span>
+			<span style="text-align: left;margin: 10px;width: 65%;">{{pointDetail.monitorName}}</span>
+		</div>
+		<!--监控点数值-->
+		<div class="row">
+			<span style="color: grey;text-align: left;margin: 10px;width: 35%;">
+				{{'POINT_VALUE'|translate}}
+			</span>
+			<span style="text-align: left;margin: 10px;width: 65%;">{{pointDetail.number}}</span>
+		</div>
+		<!--连接设备-->
+		<div class="row">
+			<span style="color: grey;text-align: left;margin: 10px;width: 35%;">
+				{{'POINT_CONNECT_DEVICE'|translate}}
+			</span>
+			<span style="text-align: left;margin: 10px;width: 65%;">{{pointDetail.connectDevice}}</span>
+		</div>
+		<!--寄存器类型-->
+		<div class="row">
+			<span style="color: grey;text-align: left;margin: 10px;width: 35%;">
+				{{'POINT_ADDR_TYPE'|translate}}
+			</span>
+			<span style="text-align: left;margin: 10px;width: 65%;">{{pointDetail.registerType}}</span>
+		</div>
+		<!--寄存器地址-->
+		<div class="row">
+			<span style="color: grey;text-align: left;margin: 10px;width: 35%;">
+				{{'POINT_REGISTER_TYPE'|translate}}
+			</span>
+			<span style="text-align: left;margin: 10px;width: 65%;">{{pointDetail.registerAddr}}</span>
+		</div>
+		<!--数据格式-->
+		<div class="row">
+			<span style="color: grey;text-align: left;margin: 10px;width: 35%;">
+				{{'POINT_DATA_TYPE'|translate}}
+			</span>
+			<span style="text-align: left;margin: 10px;width: 65%;">{{pointDetail.dataType}}</span>
+		</div>
+		<!--整数位数-->
+		<div class="row">
+			<span style="color: grey;text-align: left;margin: 10px;width: 35%;">
+				{{'POINT_INTEGER_DIGIT'|translate}}
+			</span>
+			<span style="text-align: left;margin: 10px;width: 65%;">{{pointDetail.integerDigit}}</span>
+		</div>
+		<!--小数位数-->
+		<div class="row">
+			<span style="color: grey;text-align: left;margin: 10px;width: 35%;">
+				{{'POINT_DECIMAL_DIGIT'|translate}}
+			</span>
+			<span style="text-align: left;margin: 10px;width: 65%;">{{pointDetail.decimalDigit}}</span>
+		</div>
+		<!--描述-->
+		<div class="row">
+			<span style="color: grey;text-align: left;margin: 10px;width: 35%;">
+				{{'POINT_DESCRIBE'|translate}}
+			</span>
+			<span style="text-align: left;margin: 10px;width: 65%;">{{pointDetail.describe}}</span>
+		</div>
+	</ion-content>
+</ion-view>

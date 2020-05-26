@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">触摸屏测试</string>
+    
+    <string name="main_tv_clear">次数清空</string>
+    <string name="main_tv_open_count">开机次数</string>
+    <string name="main_btn_com1_test">COM1测试</string>
+    <string name="main_btn_com2_test">COM2测试</string>
+    <string name="main_btn_buzzer_test">蜂鸣器测试</string>
+    <string name="main_btn_lcd_test">LCD背光测试</string>
+    <string name="main_btn_memory_test">内存测试</string>
+    <string name="main_btn_flash_test">Flash测试</string>
+    <string name="main_btn_sd_test">SD测试</string>
+    <string name="main_btn_u_test">U盘测试</string>
+    <string name="main_btn_local_mac_test">本地网卡测试</string>
+    <string name="main_btn_wifi_test">WiFi模块测试</string>
+    <string name="main_btn_4g_test">4G模块测试</string>
+    <string name="main_btn_vidio_test">音/视频测试</string>
+    <string name="main_btn_restart_test">重启设置</string>
+    <string name="main_btn_all_test">全部测试</string>
+    <string name="main_btn_stress_test">压力测试</string>
+    <string name="main_btn_delete_test">删除本程序</string>
+
+</resources>

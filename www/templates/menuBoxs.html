@@ -1,0 +1,84 @@
+<ion-view title="{{'BOXS_TTILE'| translate}}" id="boxs" style="text-transform:none;">
+
+	<ion-content scroll="false">
+
+		<!--无网络时出现-->
+		<!--<div ng-if="networkState=='none'" style="text-align: center;">
+			{{'NET_DISONNECT'| translate}}
+		</div>-->
+
+		<ion-scroll style="height: 100%;" ng-show="!isShowMap">
+			<ion-list>
+				<div ng-repeat="boxs in boxsGroup">
+					<ion-item class="item-stable" ng-click="toggleGroup(boxs)" ng-class="{active: isGroupShown(boxs)}">
+						<i class="icon" ng-class="isGroupShown(boxs) ? 'ion-minus' : 'ion-plus'"></i> &nbsp;{{boxs.groupName}}
+					</ion-item>
+					<ion-item class="item-accordion" ng-repeat="box in boxs.boxList" ng-show="isGroupShown(boxs)">
+						<div ng-click="goBox(box)">
+							<div ng-if="box.state != 0"><img src="img/online.png" />{{box.boxName}}</div>
+							<div ng-if="box.state == 0"><img src="img/offline.png" />{{box.boxName}}</div>
+						</div>
+					</ion-item>
+				</div>
+			</ion-list>
+		</ion-scroll>
+
+		<div id="allmap" style="height: 100%;width: 100%;" ng-show="isShowMap">
+		</div>
+
+		<div class="padding" style=" position: relative;bottom: 60px;float: left;left: 50%;">
+			<div ng-show="!isShowMap" style=" position: relative;z-index: 20;left: -50%;">
+				<button class="button button-small button-positive" style="width: 70px;">{{'BOXS_LIST'| translate}}</button>
+				<button class="button button-small button-outline button-positive" ng-click="showMap(true)" style="width: 70px;">{{'BOXS_MAP'| translate}}</button>
+			</div>
+
+			<div ng-show="isShowMap" style=" position: relative;z-index: 20;left: -50%;">
+				<button class="button button-small button-outline button-positive" ng-click="showMap(false)" style="width: 70px;">{{'BOXS_LIST'| translate}}</button>
+				<button class="button button-small button-positive" style="width: 70px;">{{'BOXS_MAP'| translate}}</button>
+			</div>
+		</div>
+	</ion-content>
+
+	<!--<div class="bar bar-footer" 
+		style="border: 0px !important;border-bottom-color: transparent !important;
+			background-image: none !important;border-bottom: none !important;">
+			
+		<div style="width:100%;align-content: center;">
+			<button class="button button-clear">Left</button>
+			<button class="button button-clear">Right</button>
+		</div>
+		
+	</div>-->
+	<!--<ion-tabs class="tabs-stable tabs-icon-top tabs-top">
+
+		<ion-tab id="list" title="{{'BOXS_LIST'| translate}}" icon-on="ion-ios-list" icon-off="ion-ios-list-outline" ng-click="selectTab(0)">
+			<ion-view>
+				<ion-content class="has-header">
+					<ion-list>
+						<div ng-repeat="boxs in boxsGroup">
+							<ion-item class="item-stable" ng-click="toggleGroup(boxs)" ng-class="{active: isGroupShown(boxs)}">
+								<i class="icon" ng-class="isGroupShown(boxs) ? 'ion-minus' : 'ion-plus'"></i> &nbsp;{{boxs.groupName}}
+							</ion-item>
+							<ion-item class="item-accordion" ng-repeat="box in boxs.boxList" ng-show="isGroupShown(boxs)">
+								<div ng-click="goBox(box)">
+									<i class="icon ion-cube"></i> &nbsp;{{box.boxName}}
+								</div>
+							</ion-item>
+						</div>
+					</ion-list>
+				</ion-content>
+			</ion-view>
+		</ion-tab>
+
+		<ion-tab title="{{'BOXS_MAP'| translate}}" icon-on="ion-ios-location" icon-off="ion-ios-location-outline" ng-select="selectTab(1)">
+			<ion-view>
+				<ion-content class="has-header">
+					<div id="allmap" style="height: 100%;">
+					</div>
+				</ion-content>
+			</ion-view>
+		</ion-tab>
+
+	</ion-tabs>
+	-->
+</ion-view>

@@ -1,0 +1,70 @@
+{
+  "_from": "cordova-sqlite-storage@0.7.14",
+  "_id": "cordova-sqlite-storage@0.7.14",
+  "_inBundle": false,
+  "_integrity": "sha1-be8XRgqnpZQI2wUdrLN0xxZYk2w=",
+  "_location": "/cordova-sqlite-storage",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "cordova-sqlite-storage@0.7.14",
+    "name": "cordova-sqlite-storage",
+    "escapedName": "cordova-sqlite-storage",
+    "rawSpec": "0.7.14",
+    "saveSpec": null,
+    "fetchSpec": "0.7.14"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-sqlite-storage/-/cordova-sqlite-storage-0.7.14.tgz",
+  "_shasum": "6def17460aa7a59408db051dacb374c71658936c",
+  "_spec": "cordova-sqlite-storage@0.7.14",
+  "_where": "F:\\h5\\V-Box\\node_modules",
+  "author": {
+    "name": "various"
+  },
+  "bugs": {
+    "url": "https://github.com/litehelpers/Cordova-sqlite-storage/issues"
+  },
+  "bundleDependencies": false,
+  "cordova": {
+    "id": "cordova-sqlite-storage",
+    "platforms": [
+      "android",
+      "ios",
+      "windows",
+      "wp8",
+      "wp7",
+      "amazon-fireos"
+    ]
+  },
+  "deprecated": false,
+  "description": "Native interface to SQLite for PhoneGap/Cordova",
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.3.0"
+    }
+  ],
+  "homepage": "https://github.com/litehelpers/Cordova-sqlite-storage",
+  "keywords": [
+    "sqlite",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios",
+    "cordova-windows",
+    "cordova-wp8",
+    "cordova-wp7",
+    "cordova-amazon-fireos"
+  ],
+  "license": "MIT",
+  "name": "cordova-sqlite-storage",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/litehelpers/Cordova-sqlite-storage.git"
+  },
+  "version": "0.7.14"
+}

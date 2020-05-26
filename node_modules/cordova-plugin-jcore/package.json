@@ -1,0 +1,57 @@
+{
+  "_from": "cordova-plugin-jcore",
+  "_id": "cordova-plugin-jcore@1.1.9",
+  "_inBundle": false,
+  "_integrity": "sha512-owlS98vCWt5jRBkGmB9RtkWNg0+TcTLtg4kRG3kooCqHlR2QxS1mkvOj7u/n6matxzOMJW8qrrWWpWd3BC+gnQ==",
+  "_location": "/cordova-plugin-jcore",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "cordova-plugin-jcore",
+    "name": "cordova-plugin-jcore",
+    "escapedName": "cordova-plugin-jcore",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-jcore/-/cordova-plugin-jcore-1.1.9.tgz",
+  "_shasum": "a6a138af160f69a66098866648f02db7be50ecfe",
+  "_spec": "cordova-plugin-jcore",
+  "_where": "F:\\h5\\V-Box\\node_modules",
+  "author": {
+    "name": "wilhantian, jiguang"
+  },
+  "bugs": {
+    "url": "https://github.com/jpush/cordova-plugin-jcore/issues"
+  },
+  "bundleDependencies": false,
+  "cordova": {
+    "id": "cordova-plugin-jcore",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "deprecated": false,
+  "description": "jcore for cordova plugin",
+  "homepage": "https://github.com/jpush/cordova-plugin-jcore#readme",
+  "keywords": [
+    "jcore",
+    "jpush",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "license": "MIT License",
+  "name": "cordova-plugin-jcore",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jpush/cordova-plugin-jcore.git"
+  },
+  "version": "1.1.9"
+}

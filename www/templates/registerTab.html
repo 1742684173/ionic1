@@ -1,0 +1,151 @@
+<ion-view title="{{'REGISTER_TITLE'| translate}}" id="registerTab" style="text-transform:none;">
+	<header class="bar bar-header bar-positive">
+		<button class="button button-clear " ng-click="back()">
+			<i class="icon ion-ios-arrow-back"></i>
+			{{'BACK'| translate}}
+		</button>
+		<h1 class="title ">{{'REGISTER_TITLE'| translate}}</h1>
+	</header>
+	<ion-tabs class="tabs-stable tabs-icon-top tabs-top">
+
+		<!--手机注册-->
+		<ion-tab title="{{'REGISTER_PHONE_TITLE'| translate}}" icon-on="ion-ios-telephone" icon-off="ion-ios-telephone-outline">
+			<ion-view>
+				<ion-content class="has-header text-center">
+					<form name="registerPhoneForm" novalidate>
+						<!--手机输入框-->
+						<div class="item item-input row">
+							<div class="col col-20">
+								{{'REGISTER_PHONE'| translate}}
+								<span style="color: red;" ng-show="registerPhoneForm.phone.$invalid">*</span>
+							</div>
+							<div class="col col-80">
+								<input type="text" placeholder="{{'REGISTER_PHONE_INPUT'| translate}}" name="phone" required ng-minlength="11" ng-maxlength="11" ng-model="regPhone.phone">
+							</div>
+						</div>
+
+						<!--验证码输入框 和 获取验证码按钮-->
+						<div class="item item-input row">
+							<div class="col col-20">
+								{{'REGISTER_PHONE_CODE'| translate}}
+								<span style="color: red;" ng-show="registerPhoneForm.code.$invalid">*</span>
+							</div>
+							<div class="col col-40">
+								<input type="text" placeholder="{{'REGISTER_PHONE_CODE_INPUT'| translate}}" name="code" required ng-minlength="6" ng-maxlength="6" ng-model="regPhone.code">
+							</div>
+							<div class="col col-30">
+								<button class="button" ng-click="registerPhoneGetCode()" ng-bind="description" ng-disabled="canClick">{{'REGISTER_PHONE_CODE_GET'| translate}}</button>
+							</div>
+							<div class="col col-10">
+							</div>
+						</div>
+
+						<!--密码输入框 -->
+						<div class="item item-input row">
+							<div class="col col-20">
+								{{'REGISTER_PHONE_PWD1'| translate}}
+								<span style="color: red;" ng-show="registerPhoneForm.password.$invalid">*</span>
+							</div>
+							<div class="col col-80">
+								<input type="password" placeholder="{{'REGISTER_PHONE_PWD1_MSG'| translate}}" name="password" required ng-pattern="/[a-zA-Z0-9]/" ng-maxlength="30" ng-minlength="6" ng-model="regPhone.password">
+							</div>
+						</div>
+
+						<!--确认密码输入框-->
+						<div class="item item-input row">
+							<div class="col col-20">
+								{{'REGISTER_PHONE_PWD2'| translate}}
+								<span style="color: red;" ng-show="registerPhoneForm.password2.$invalid ||
+                     	 	 		regPhone.password != regPhone.password2">*</span>
+							</div>
+							<div class="col col-80">
+								<input type="password" placeholder="{{'REGISTER_PHONE_PWD2_MSG'| translate}}" name="password2" required ng-model="regPhone.password2">
+							</div>
+						</div>
+
+					</form>
+
+					<br />
+					<!--是否勾选阅读协议-->
+					<div class="useragree">
+						<input type="checkbox" ng-model="regPhone.isSelect" ng-init="regPhone.isSelect = false">
+						<span> {{'REGISTER_PHONE_CHECK_AGREE'| translate}}
+             				<a ng-click="modal.show()">{{'REGISTER_PHONE_USER_PROTOCOL'| translate}}</a>
+             			</span>
+					</div>
+
+					<br><br>
+					<button style="width: 200px;" class="button button-balanced" ng-disabled="registerPhoneForm.phone.$invalid ||
+						registerPhoneForm.code.$invalid || registerPhoneForm.password.$invalid ||
+						registerPhoneForm.password2.$invalid ||regPhone.password != regPhone.password2 || 
+            			!regPhone.isSelect" ng-click="registerPhone()">
+						{{'REGISTER_PHONE_BUTTON'| translate}}
+					</button>
+
+				</ion-content>
+			</ion-view>
+		</ion-tab>
+
+		<!--邮箱注册-->
+		<ion-tab title="{{'REGISTER_EMAIL_TITLE'| translate}}" icon-on="ion-ios-email" icon-off="ion-ios-email-outline">
+			<ion-view>
+				<ion-content class="has-header text-center">
+					<form name="registerEmailForm" novalidate>
+						<!--邮箱输入-->
+						<div class="item item-input row">
+							<div class="input-label col col-20">
+								{{'REGISTER_EMAIL'| translate}}
+								<span style="color: red;" ng-show="registerEmailForm.email.$invalid">*</span>
+							</div>
+							<div class="input-label col col-80">
+								<input type="email" placeholder="{{'REGISTER_EMAIL_INPUT'| translate}}" name="email" required ng-model="regEmail.email" ng-minlength="6" ng-maxlength="20">
+							</div>
+						</div>
+
+						<!--密碼输入-->
+						<div class="item item-input row">
+							<div class="input-label col col-20">
+								{{'REGISTER_EMAIL_PWD1'| translate}}
+								<span style="color: red;" ng-show="registerEmailForm.password.$invalid">*</span>
+							</div>
+							<div class="input-label col col-80">
+								<input type="password" placeholder="{{'REGISTER_EMAIL_PWD1_MSG'| translate}}" name="password" required ng-pattern="/[a-zA-Z0-9]/" ng-maxlength="30" ng-minlength="6" ng-model="regEmail.password">
+							</div>
+						</div>
+
+						<!--确认密码-->
+						<div class="item item-input row">
+							<!--&& reg.password1 != reg.password2-->
+							<div class="input-label col col-20">
+								{{'REGISTER_EMAIL_PWD2'| translate}}
+								<span style="color: red;" ng-show="registerEmailForm.password2.$invalid ||
+                     	 	 		regEmail.password !=regEmail.password2">*</span>
+							</div>
+							<div class="input-label col col-80">
+								<input type="password" placeholder="{{'REGISTER_EMAIL_PWD2_MSG'| translate}}" name="password2" required ng-pattern="/[a-zA-Z0-9]/" ng-maxlength="30" ng-minlength="6" ng-model="regEmail.password2">
+							</div>
+						</div>
+					</form>
+
+					<br>
+					<div>
+						<input type="checkbox" name="isSelect" ng-model="regEmail.isSelect" ng-init="regEmail.isSelect = false">
+						<span> {{'REGISTER_EMAIL_CHECK_AGREE'| translate}}
+             				<a ng-click="modal.show()">{{'REGISTER_EMAIL_USER_PROTOCOL'| translate}}</a>
+             			</span>
+					</div>
+
+					<br>
+					<br>
+
+					<button style="width: 200px;" class="button button-balanced" ng-disabled="registerEmailForm.email.$invalid ||
+						registerEmailForm.password.$invalid || registerEmailForm.password2.$invalid ||
+            			regEmail.password!=regEmail.password2 ||!regEmail.isSelect" ng-click="registerEmail()">
+						{{'REGISTER_EMAIL_BUTTON'| translate}}
+					</button>
+
+				</ion-content>
+			</ion-view>
+		</ion-tab>
+	</ion-tabs>
+</ion-view>

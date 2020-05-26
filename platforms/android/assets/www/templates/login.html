@@ -1,0 +1,51 @@
+<ion-view id="login" style="text-transform:none;">
+	<header class="bar bar-header bar-positive">
+		<h1 class="title ">{{'LOGIN_TITLE'| translate}}</h1>
+	</header>
+	<ion-content padding="true" class="has-header">
+		<div>
+			<form id="form_login" class="list">
+				<div class="item item-input">
+					<label style="padding-right: 10px;"> {{'LOGIN_ACCOUNT'| translate}}</label>
+					<!--账户输入-->
+					<input id="account" ng-model="loginData.user" placeholder="{{'LOGIN_ACCOUNT_INPUT'| translate}}" type="text">
+					<!--删除账户图标-->
+					<i class="ion-close-circled" ng-click="clearUser()" ng-class="loginData.user.length>0?'show':'hide'" style="padding: 5px 10px; color: #ddd"></i>
+					<div class="spacer" style="width: 20px;"></div>
+				</div>
+
+				<div class="item item-input">
+					<label style="padding-right: 10px;">{{'LOGIN_PWD'| translate}}</label>
+					<!--密码输入框-->
+					<input id="pwd" ng-model="loginData.pwd" placeholder="{{'LOGIN_PWD_INPUT'| translate}}" type="password">
+					<!--删除密码框-->
+					<i class="ion-close-circled" ng-click="clearPwd()" ng-class="loginData.pwd.length>0?'show':'hide'" style="padding: 5px 10px; color: #ddd"></i>
+					<div class="spacer" style="width: 20px;"></div>
+				</div>
+
+				<div class="spacer" style="height: 30px;"></div>
+
+				<!--登录按钮-->
+				<button id="login_btn" ng-click="login()" class="button button-block button-positive">{{'LOGIN_BUTTON_LOGIN_TEXT'| translate}}</button>
+
+				<div id="para2">
+					<div id="para1">
+						<!--进入注册-->
+						<button id="register_btn" class="button button-clear button-positive" ng-click="register()">{{'LOGIN_BUTTON_REGISTER_TEXT'| translate}}</button>
+					</div>
+
+					<div id="para1">
+						<button class="button button-clear button-stable">|</button>
+					</div>
+
+					<div style="display:inline">
+						<!--进入找回密码-->
+						<button id="findPwd_btn" class="button button-clear button-positive" ng-click="findPwd()">{{'LOGIN_BUTTON_FINDPWD_TEXT'| translate}}</button>
+					</div>
+				</div>
+
+			</form>
+		</div>
+
+	</ion-content>
+</ion-view>

@@ -1,0 +1,332 @@
+<ion-view id="box" style="text-transform:none;">
+	<header class="bar bar-header bar-positive">
+		<button class="button button-clear " ng-click="back()">
+			<i class="icon ion-ios-arrow-back"></i>
+			{{'BACK'| translate}}
+		</button>
+		<h1 class="title ">{{box.boxName}}</h1>
+	</header>
+
+	<ion-tabs class="tabs-stable tabs-icon-top tabs-top">
+
+		<!--实时数据-->
+		<ion-tab id="real" title="{{'REAL_DATA'| translate}}" icon-on="ion-ios-clock" icon-off="ion-ios-clock-outline">
+			<ion-view>
+				<ion-content class="has-header" scroll="false">
+
+					<!--无网络时出现-->
+					<div ng-if="networkState=='none'" style="text-align: center;margin-top: 100px;">
+						{{'NET_DISONNECT'| translate}}
+					</div>
+
+					<div ng-if="networkState!='none'" style="text-align: center;height: 100%;">
+
+						<div style="height: 100%;">
+							<div class="item item-input item-select" style="height: 10%;">
+								<div class="input-label">
+									<span>{{'REAL_GROUP' | translate}}</span>
+								</div>
+								<select ng-model="selectGroup" ng-change="findRealDataByGroup(selectGroup)">
+									<!--<option value="all" selected="selected">{{'REAL_GROUP_ALL'|translate}}</option>-->
+									<option ng-repeat="x in pointsGroup" value="{{x.groupId}}">{{x.groupName}}</option>
+								</select>
+							</div>
+
+							<div ng-if="pointRealData == undefined || pointRealData.length <= 0 " style="padding-top: 100px;">
+								{{'DATA_IS_EMPTY'| translate}}
+							</div>
+
+							<div class="item" ng-if="pointRealData.length > 0 " style="padding-top:5px;height: 8%">
+								<div class="row">
+									<div class="col">{{'REAL_STATUS' | translate}}</div>
+									<div class="col">{{'REAL_NAME' | translate}}</div>
+									<div class="col">{{'REAL_VALUE' | translate}}</div>
+								</div>
+							</div>
+
+							<ion-scroll style="height: 82%;">
+
+								<ion-list ng-if="pointRealData.length > 0 ">
+
+									<ion-item ng-repeat="item in pointRealData" item="item" class="item-remove-animate">
+										<div class="row" ng-click="goPoint(item)">
+											<div class="col" id="wenZiShenLue">
+												<span ng-if="item.state == '0'" style="color: #D5D5D8;">{{'REAL_STATUS_OUTLINE' | translate}}</span>
+												<span ng-if="item.state == '1'" style="color: green;">{{'REAL_STATUS_ONLINE' | translate}}</span>
+												<span ng-if="item.state == '2'" style="color: #FF0033 ;">{{'REAL_STATUS_TIMEOUT' | translate}}</span>
+												<span ng-if="item.state == '3'" style="color: #FFA500;">{{'REAL_STATUS_NOISSUED' | translate}}</span>
+												<span ng-if="item.state == '-1'" style="color: #FF0033;">{{'REAL_STATUS_BUILD_FAILURE' | translate}}</span>
+												<span ng-if="item.state == '-2'" style="color: #FF0033 ;">{{'REAL_STATUS_CHANGE_FAILURE' | translate}}</span>
+												<span ng-if="item.state == '-3'" style="color: #FF0033;">{{'REAL_STATUS_BIND_FAILURE' | translate}}</span>
+											</div>
+											<div class="col" id="wenZiShenLue">{{item.monitorName}}</div>
+											<div class="col" id="wenZiShenLue">{{item.number}}</div>
+										</div>
+									</ion-item>
+
+									<ion-item class="item-divider">
+									</ion-item>
+								</ion-list>
+
+							</ion-scroll>
+
+						</div>
+
+						<!--选择当前报警还是历史报警-->
+						<div class="row row-top" ng-if="pointRealData.length > 0" style="background-color:white;position: relative;bottom: 50px;border-top: solid 1px gray;">
+							<div class="col"><i class="icon ion-ios-arrow-left" ng-click="findRealByPage(currentPage-1)" style="font-size: 30px;"></i></div>
+							<div class="col col-40">
+								<!--<input type="number" ng-model="currentPage" style="width: 30px;display:inline">-->
+								<span style="display:inline" id="wenZiShenLue">{{currentPage}}</span>
+								<span style="display:inline" id="wenZiShenLue">/{{realTotalPage}}</span>
+							</div>
+							<div class="col"><i class="icon ion-ios-arrow-right" ng-click="findRealByPage(currentPage+1)" style="font-size: 30px;"></i></div>
+							<div class="col">
+								<button class="button button-small button-clear button-positive" ng-click="findRealByPage(1)">{{'REAL_TOP_PAGE'| translate}}</button>
+							</div>
+							<div class="col">
+								<button class="button button-small button-clear button-positive" ng-click="findRealByPage(realTotalPage)">{{'REAL_BOTTOM_PAGE'| translate}}</button>
+							</div>
+						</div>
+
+					</div>
+				</ion-content>
+			</ion-view>
+		</ion-tab>
+
+		<!--报警数据-->
+		<ion-tab title="{{'ALARM_DATA'| translate}}" badge="0" badge-style="badge-assertive" icon-on="ion-ios-bell" icon-off="ion-ios-bell-outline">
+			<ion-view>
+				<ion-content class="has-header" scroll="false">
+					<!--无网络时出现-->
+					<div ng-if="networkState=='none'" style="text-align: center;margin-top: 100px;">
+						{{'NET_DISONNECT'| translate}}
+					</div>
+
+					<div ng-if="networkState!='none'" style="text-align: center;height: 100%;">
+
+						<div style="height: 100%;">
+
+							<!--日期选择框-->
+							<div class="row " ng-show="!isShowAlarm" style="text-align: left;height: 10% ">
+								<div class="col col-30 col-center " ng-click="openAlarmBeginDate()">
+									<label class="item item-input" style="height:35px;">
+										<label type="text"  ng-bind="alarmBeginDate | date: 'yyyy-MM-dd' " style="text-align: center;cursor: pointer;color:darkgrey;"/>
+									</label>
+								</div>
+								<div class="col col-30 col-center" ng-click="openAlarmEndDate()">
+									<label class="item item-input" style="height:35px;">
+										<label type="text"  ng-bind="alarmEndDate | date: 'yyyy-MM-dd' " style="text-align: center;cursor: pointer;color:darkgrey;"/>
+									</label>
+								</div>
+								<div class="col col-10 col-center ">
+									<i class="icon ion-ios-search-strong" ng-click="findAlarm()" style="font-size: 30px;text-align: right;color: #007AFF;cursor: pointer;"></i>
+								</div>
+							</div>
+
+							<div ng-if="alarmData.length <= 0 " style="height: 90%;padding-top: 100px;">
+								{{'DATA_IS_EMPTY'| translate}}
+							</div>
+
+							<!--数据名称-->
+							<div class="item" ng-if="alarmData.length > 0 " style="padding-top:5px;height: 8%">
+								<div class="row ">
+									<!--<div class="col col-20 ">{{'ALARM_ID' | translate}}</div>-->
+									<div class="col col-33 ">{{'ALARM_NAME' | translate}}</div>
+									<div class="col col-33 ">{{'ALARM_VALUE' | translate}}</div>
+									<!--<div class="col col-20 ">{{'ALARM_HANDLE' | translate}}</div>-->
+									<div class="col col-33 ">{{'ALARM_DATE' | translate}}</div>
+								</div>
+							</div>
+
+							<!--数据列表滑动条-->
+							<ion-scroll style="height: 82%;">
+
+								<!-- 下拉下一页-->
+								<ion-refresher pulling-text="{{'PULL_REFRESHER'|translate}}" on-refresh="doRefresh(2)"></ion-refresher>
+
+								<ion-list>
+									<ion-item ng-repeat="item in alarmData " item="item " class="item-remove-animate " style="padding-top:5px;height: 70px ">
+										<div class="row row-center ">
+											<div class="col col-33 " id="wenZiShenLue" ng-click="showAlarmDetail(item)">{{item.monitorName}}</div>
+											<div class="col col-33 " ng-if="item.state == 2" id="wenZiShenLue" ng-click="showAlarmDetail(item)">{{item.number}}</div>
+											<div class="col col-33 " ng-if="item.state == 1" ng-click="confirmAlarm(item)"><span style="color: red;">{{item.number}}</span></div>
+											<div class="col col-33 " id="wenZiShenLue" ng-click="showAlarmDetail(item)">
+												{{item.monitorTime | date:"yyyy-MM-dd "}}<br> {{ item.monitorTime | date:"HH:mm:ss "}}
+											</div>
+										</div>
+									</ion-item>
+									<ion-item class="item-divider" ng-if="!isShowAlarm">
+									</ion-item>
+								</ion-list>
+
+								<!--上拉加载下一页-->
+								<ion-infinite-scroll ng-if="alarmPage < alarmTotalPage" immediate-check="false" on-infinite="loadmore(2)" distance="1%"></ion-infinite-scroll>
+
+							</ion-scroll>
+
+						</div>
+
+						<!--选择当前报警还是历史报警-->
+						<div class="padding" style=" position: relative;bottom: 60px;float: left;left: 50%;">
+							<div ng-if="isShowAlarm" style=" position: relative;z-index: 20;left: -50%;">
+								<button class="button button-small button-positive" style="width: 70px;">{{'ALARM_POINT_NOW'| translate}}</button>
+								<button class="button button-small button-outline button-positive" ng-click="showAlarm(false)" ng-disabled="isLoadComplete" style="width: 70px;">{{'ALARM_POINT_HISTORY'| translate}}</button>
+							</div>
+
+							<div ng-if="!isShowAlarm" style=" position: relative;z-index: 20;left: -50%;">
+								<button class="button button-small button-outline button-positive" ng-click="showAlarm(true)" ng-disabled="isLoadComplete" style="width: 70px;">{{'ALARM_POINT_NOW'| translate}}</button>
+								<button class="button button-small button-positive" style="width: 70px;">{{'ALARM_POINT_HISTORY'| translate}}</button>
+							</div>
+						</div>
+
+					</div>
+
+				</ion-content>
+			</ion-view>
+		</ion-tab>
+
+		<!--历史数据-->
+		<ion-tab title="{{ 'HISTORY_DATA'| translate}} " icon-on="ion-ios-email " icon-off="ion-ios-email-outline ">
+			<ion-view>
+				<ion-content class="has-header " scroll="false">
+					<!--无网络时出现-->
+					<div ng-if="networkState=='none'" style="text-align: center;margin-top: 100px;">
+						{{'NET_DISONNECT'| translate}}
+					</div>
+
+					<div ng-if="networkState!='none'" style="text-align: center;height: 100%;">
+
+						<!--监控点-->
+						<div class="row item-input item-select" style="height: 10%;">
+							<div class="input-label" style="text-align: left;">
+								<span>{{'HISTORY_POINT' | translate}}</span>
+							</div>
+							<select ng-model="selectPoint" ng-change="pointChange(selectPoint)">
+								<option value="">{{'HISTORY_SELECT'|translate}}</option>
+								<option ng-repeat="point in points " value="{{point.monitorId}} ">{{point.monitorName}}</option>
+							</select>
+						</div>
+
+						<!--日期选择框-->
+						<div class="row " style="height: 10%;">
+							<div class="col col-30 col-center " style="text-align: left; " ng-click="openHistoryBeginDate() ">
+								<label class="item item-input" style="height:35px;">
+								<label type="text"  ng-bind="historyBeginDate | date: 'yyyy-MM-dd' "  style="text-align: center;cursor: pointer;color:darkgrey;"/>
+							</label>
+							</div>
+							<div class="col col-30 col-center " style="text-align: right; " ng-click="openHistoryEndDate()">
+								<label class="item item-input" style="height:35px;">
+								<label type="text"  ng-bind="historyEndDate | date: 'yyyy-MM-dd' " style="text-align: center;cursor: pointer;color:darkgrey;"/>
+							</label>
+							</div>
+							<div class="col col-10 col-center ">
+								<i class="icon ion-ios-search-strong" ng-click="findHistory()" style="font-size: 30px;text-align: right;color: #007AFF;cursor: pointer;"></i>
+							</div>
+						</div>
+
+						<div ng-if="pointHistoryData == undefined || pointHistoryData.length <= 0 " style="padding-top: 100px;height: 20%;">
+							{{'DATA_IS_EMPTY'| translate}}
+						</div>
+
+						<div class="item" ng-if="pointHistoryData.length > 0 " style="padding-top:5px;height: 8%">
+							<div class="row ">
+								<div class="col ">{{'HISTORY_VALUE' | translate}}</div>
+								<div class="col ">{{'HISTORY_DATE' | translate}}</div>
+							</div>
+						</div>
+
+						<ion-scroll style="text-align: center;height: 72%;">
+							<!-- 下拉下一页-->
+							<ion-refresher pulling-text="{{'PULL_REFRESHER'|translate}}" on-refresh="doRefresh(3)"></ion-refresher>
+
+							<ion-list>
+								<ion-item ng-repeat="item in pointHistoryData " item="item " class="item-remove-animate " style="padding-top: 5px;height: 70px ">
+									<div class="row row-center ">
+										<div class="col ">{{item.number}}</div>
+										<div class="col ">
+											{{item.monitorTime | date:"yyyy-MM-dd "}}<br> {{ item.monitorTime | date:"HH:mm:ss "}}
+										</div>
+									</div>
+								</ion-item>
+							</ion-list>
+
+							<!--上拉加载上一页-->
+							<ion-infinite-scroll ng-if="historyPage < historyTotalPage" immediate-check="false" on-infinite="loadmore(3)" distance="1%"></ion-infinite-scroll>
+						</ion-scroll>
+
+					</div>
+				</ion-content>
+			</ion-view>
+		</ion-tab>
+
+		<!--单个盒子信息-->
+		<ion-tab title="{{'BOX_INFO'| translate}}" icon-on="ion-ios-information" icon-off="ion-ios-information-outline">
+			<ion-view>
+				<ion-content class="has-header">
+					<!--V-Box名称-->
+					<div class="row" style="margin-top: 20px;">
+						<span style="color: grey;text-align: left;margin: 10px;width: 35%;">
+						{{'BOX_INFO_NAME'|translate}}
+						</span>
+						<span style="text-align: left;margin: 10px;width: 65%;">{{box.boxName}}</span>
+					</div>
+					
+					<!--在线状态-->
+					<div class="row">
+						<span style="color: grey;text-align: left;margin: 10px;width: 35%;">
+						{{'BOX_INFO_STATUS'|translate}}
+						</span>
+						<span style="text-align: left;margin: 10px;width: 65%;">
+							<div ng-if="box.state != 0">{{'BOX_INFO_ONLINE'|translate}}</div>
+							<div ng-if="box.state == 0">{{'BOX_INFO_OFFLINE'|translate}}</div>
+						</span>
+					</div>
+					
+					<!--机器码-->
+					<div class="row">
+						<span style="color: grey;text-align: left;margin: 10px;width: 35%;">
+						{{'BOX_INFO_CODE'|translate}}
+						</span>
+						<span style="text-align: left;margin: 10px;width: 65%;">{{box.machineCode}}</span>
+					</div>
+					
+					<!--设备型号-->
+					<div class="row">
+						<span style="color: grey;text-align: left;margin: 10px;width: 35%;">
+						{{'BOX_INFO_TYPE'|translate}}
+						</span>
+						<span style="text-align: left;margin: 10px;width: 65%;">{{box.devModel}}</span>
+					</div>
+					
+					<!--经度-->
+					<div class="row">
+						<span style="color: grey;text-align: left;margin: 10px;width: 35%;">
+						{{'BOX_INFO_LONGITUDE'|translate}}
+						</span>
+						<span style="text-align: left;margin: 10px;width: 65%;">{{box.map.split(",")[0]}}</span>
+					</div>
+					
+					<!--纬度-->
+					<div class="row">
+						<span style="color: grey;text-align: left;margin: 10px;width: 35%;">
+						{{'BOX_INFO_LATITUDE'|translate}}
+						</span>
+						<span style="text-align: left;margin: 10px;width: 65%;">{{box.map.split(",")[1]}}</span>
+					</div>
+					
+					<!--备注-->
+					<div class="row">
+						<span style="color: grey;text-align: left;margin: 10px;width: 35%;">
+						{{'BOX_INFO_NOTE'|translate}}
+						</span>
+						<span style="text-align: left;margin: 10px;width: 65%;">{{box.remark}}</span>
+					</div>
+					
+				</ion-content>
+			</ion-view>
+		</ion-tab>
+
+	</ion-tabs>
+
+</ion-view>
